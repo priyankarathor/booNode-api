@@ -9,6 +9,8 @@ const app = express();
 const inventoryRoutes = require("./routes/inventoryRoutes");
 
 const catalogRoutes = require("./routes/catalogRoutes");
+app.use(express.json());
+const ordersRoutes = require("./routes/ordersRoutes");
 
 // ---------------- AMAZON TEST ----------------
 app.get("/amazonTest", async (req, res) => {
@@ -75,6 +77,8 @@ app.use("/catalog", catalogRoutes);
 
 app.use("/api/inventory", inventoryRoutes);
 
+
+app.use("/api", ordersRoutes);
 
 app.listen(5000, () => {
   console.log("Server running on port 5000");
