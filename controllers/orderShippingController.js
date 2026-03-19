@@ -2,7 +2,11 @@ const { getOrderAddress } = require("../services/orderShipping");
 
 async function fetchOrderAddress(req, res) {
   try {
-    const { orderId } = req.params;
+    const { orderId } = req.body; // get orderId from POST body
+    if (!orderId) {
+      return res.status(400).json({ error: "orderId is required in request body" });
+    }
+
     const data = await getOrderAddress(orderId);
     res.json(data);
   } catch (error) {
@@ -10,4 +14,4 @@ async function fetchOrderAddress(req, res) {
   }
 }
 
-module.exports = { fetchOrderAddress };  // ✅ make sure it's an object with function reference
+module.exports = { fetchOrderAddress };
