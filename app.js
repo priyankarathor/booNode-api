@@ -6,11 +6,13 @@ const aws4 = require("aws4");
 const qs = require("qs");
 const app = express();
 
+
 const inventoryRoutes = require("./routes/inventoryRoutes");
 
 const catalogRoutes = require("./routes/catalogRoutes");
 app.use(express.json());
 const ordersRoutes = require("./routes/ordersRoutes");
+const ordershippingRoute = require("./routes/ordersShippingRoute");
 
 // ---------------- AMAZON TEST ----------------
 app.get("/amazonTest", async (req, res) => {
@@ -77,8 +79,9 @@ app.use("/catalog", catalogRoutes);
 
 app.use("/api/inventory", inventoryRoutes);
 
-
 app.use("/api", ordersRoutes);
+
+app.use("/orderShipping",ordershippingRoute);
 
 app.listen(5000, () => {
   console.log("Server running on port 5000");
