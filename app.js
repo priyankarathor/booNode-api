@@ -81,7 +81,7 @@ app.use("/api/inventory", inventoryRoutes);
 
 app.use("/api", ordersRoutes);
 
-app.use("/orderShipping",ordershippingRoute);
+app.use("/api/orderShipping",ordershippingRoute);
 
 app.listen(5000, () => {
   console.log("Server running on port 5000");
