@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const upload = require("../middlewares/upload"); // multer middleware
+const upload = require("../middlewares/upload");
 const { createBook, getBooks } = require("../controllers/bookController");
 
-// Upload a single book image with field name "image"
+// Upload image
 router.post("/", upload.single("image"), createBook);
 
 // Get all books

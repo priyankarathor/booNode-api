@@ -2,15 +2,12 @@ const Book = require("../models/Book");
 
 exports.createBook = async (req, res) => {
   try {
-    // Check if file was uploaded
     if (!req.file) {
       return res.status(400).json({ error: "Book image is required" });
     }
 
-    // Construct image URL
     const imageUrl = `http://localhost:${process.env.PORT || 5000}/uploads/${req.file.filename}`;
 
-    // Create book document
     const book = await Book.create({
       bookName: req.body.bookName,
       title: req.body.title,

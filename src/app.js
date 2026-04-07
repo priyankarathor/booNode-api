@@ -1,12 +1,15 @@
-import express from "express";
-import cors from "cors";
-import translationRoutes from "./routes/translationRoutes.js";
+const express = require("express");
+const cors = require("cors");
+const translationRoutes = require("./routes/bookRoutes"); // FIX NAME
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-app.use("/api", translationRoutes);
+// Serve uploaded images
+app.use("/uploads", express.static("uploads"));
 
-export default app;
+app.use("/api/books", translationRoutes);
+
+module.exports = app;

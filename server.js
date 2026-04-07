@@ -2,22 +2,29 @@ require("dotenv").config();
 const express = require("express");
 const connectDB = require("./config/db");
 const path = require("path");
+const cors = require("cors");
 
 const app = express();
 
-// Connect MongoDB
+// Connect DB
 connectDB();
 
 // Middleware
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve uploads folder
+// Static folder
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Routes
 const bookRoutes = require("./routes/bookRoutes");
 app.use("/api/books", bookRoutes);
+
+// Test root
+app.get("/", (req, res) => {
+  res.send("Server Running ✅");
+});
 
 // Start server
 const PORT = process.env.PORT || 5000;
